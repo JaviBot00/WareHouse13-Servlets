@@ -1,12 +1,8 @@
-package com.politecnicomalaga.appalmacen.view;
+package com.hotguy.warehouse13.view;
 
-import com.politecnicomalaga.appalmacen.controller.Controlador;
-import com.politecnicomalaga.appalmacen.dataservice.ConexionBD;
-import com.politecnicomalaga.appalmacen.model.Producto;
-import com.politecnicomalaga.appalmacen.model.ProductoPerecedero;
+import com.hotguy.warehouse13.controller.Controlador;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +12,7 @@ import java.io.PrintWriter;
 public class ListarProductosServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         response.setContentType("text/json");
         PrintWriter out = response.getWriter();
 

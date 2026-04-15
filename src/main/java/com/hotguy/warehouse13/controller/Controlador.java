@@ -1,22 +1,17 @@
-package com.politecnicomalaga.appalmacen.controller;
-
-
+package com.hotguy.warehouse13.controller;
 
 import com.google.gson.Gson;
-import com.politecnicomalaga.appalmacen.dataservice.BBDDAccess;
-import com.politecnicomalaga.appalmacen.model.*;
+import com.hotguy.warehouse13.dataservice.BBDDAccess;
+import com.hotguy.warehouse13.model.Producto;
+import com.hotguy.warehouse13.model.ProductoPerecedero;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
 
-
-public class Controlador implements DataAccess{
-
+public class Controlador implements DataAccess {
 
     public Controlador() {
-
     }
-
 
     //Ahora, el controlador sólo se preocupa de ser el intermediario entre
     //la vista (servlet) y el acceso a datos, usando clases sencillas del modelo
@@ -26,16 +21,10 @@ public class Controlador implements DataAccess{
         BBDDAccess bbdd = new BBDDAccess();
 
         try {
-            List<Producto> listaProd = bbdd.listarTodos();
-
-            return (new Gson()).toJson(listaProd);
-
-        } catch (SQLException se) {
+            return (new Gson()).toJson(bbdd.listarTodos());
+        } catch (SQLException | ClassNotFoundException se) {
             return "List Products: " + se.getMessage();
-        } catch (ClassNotFoundException c) {
-            return "List Products: " + c.getMessage();
         }
-
     }
 
     @Override
@@ -43,14 +32,9 @@ public class Controlador implements DataAccess{
         BBDDAccess bbdd = new BBDDAccess();
 
         try {
-            List<Producto> listaProd = bbdd.buscarPorCodigo(code);
-
-            return (new Gson()).toJson(listaProd);
-
-        } catch (SQLException se) {
-            return "Find Products: " + code + " - "  + se.getMessage();
-        } catch (ClassNotFoundException c) {
-            return "Find Products: " + code + " - "+ c.getMessage();
+            return (new Gson()).toJson(bbdd.buscarPorCodigo(code));
+        } catch (SQLException | ClassNotFoundException se) {
+            return "Find Products: " + code + " - " + se.getMessage();
         }
     }
 
@@ -67,8 +51,7 @@ public class Controlador implements DataAccess{
             bbdd.insertarProducto(producto);
 
         } catch (SQLException se) {
-            String result = "Product: " + producto.getCodigoProducto() +  "Insert: " + jsonProducto + "Expired:" + perecedero + " - " + se.getMessage();;
-            return result;
+            return "Product: " + producto.getCodigoProducto() + "Insert: " + jsonProducto + "Expired:" + perecedero + " - " + se.getMessage();
         } catch (ClassNotFoundException c) {
             return "Insert: " + jsonProducto + " - " + c.getMessage();
         }
