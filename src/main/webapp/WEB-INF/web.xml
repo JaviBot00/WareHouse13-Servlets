@@ -6,29 +6,30 @@
          version="4.0">
 
     <servlet>
-        <servlet-name>ListarProductosServlet</servlet-name>
-        <servlet-class>com.hotguy.warehouse13.view.ListarProductosServlet</servlet-class>
+        <servlet-name>ListProductsServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.ListProductsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ListarProductosServlet</servlet-name>
+        <servlet-name>ListProductsServlet</servlet-name>
         <url-pattern>/listar</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>BuscarProductoServlet</servlet-name>
-        <servlet-class>com.hotguy.warehouse13.view.BuscarProductosServlet</servlet-class>
+        <servlet-name>FindProductsServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.FindProductsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>BuscarProductoServlet</servlet-name>
+        <servlet-name>FindProductsServlet</servlet-name>
         <url-pattern>/buscar</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>InsertarProductosServlet</servlet-name>
-        <servlet-class>com.hotguy.warehouse13.view.InsertarProductosServlet</servlet-class>
+        <servlet-name>InsertProductServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.InsertProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>InsertarProductosServlet</servlet-name>
+        <servlet-name>InsertProductServlet</servlet-name>
         <url-pattern>/insertar</url-pattern>
     </servlet-mapping>
+
 </web-app>
