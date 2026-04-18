@@ -10,7 +10,7 @@ public class PerishableProduct extends Product {
      * @param description    human-readable name
      * @param price          unit price (must be >= 0)
      * @param stock          initial stock quantity
-     * @param expirationDate expiration date as ISO string (yyyy-MM-dd)
+     * @param expirationDate expiration date as YYYYMMDD string
      */
     public PerishableProduct(String code, String description, double price,
                              int stock, String expirationDate) {
@@ -18,10 +18,10 @@ public class PerishableProduct extends Product {
         this.expirationDate = expirationDate;
     }
 
-    /** @return expiration date as ISO string */
+    /** @return expiration date as YYYYMMDD string */
     public String getExpirationDate() { return expirationDate; }
 
-    /** @param expirationDate expiration date as ISO string (yyyy-MM-dd) */
+    /** @param expirationDate expiration date as YYYYMMDD string */
     public void setExpirationDate(String expirationDate) {
         this.expirationDate = expirationDate;
     }

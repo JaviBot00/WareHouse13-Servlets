@@ -7,6 +7,7 @@ public class Product {
     private String description;
     private double price;
     private int stock;
+    private boolean retired;
 
     /**
      * @param code        unique product code
@@ -19,6 +20,7 @@ public class Product {
         this.description = description;
         this.price = price;
         this.stock = stock;
+        this.retired = false;
     }
 
     /** @return unique product code */
@@ -53,4 +55,10 @@ public class Product {
     public void changeStock(int delta) {
         if (this.stock + delta >= 0) this.stock += delta;
     }
+
+    /** @return true if this product has been retired from the warehouse */
+    public boolean isRetired() { return retired; }
+
+    /** @param retired true to mark as retired, false to reactivate */
+    public void setRetired(boolean retired) { this.retired = retired; }
 }
