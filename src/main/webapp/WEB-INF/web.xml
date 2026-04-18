@@ -5,13 +5,24 @@
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- ── Read ──────────────────────────────────────────────────────────── -->
+
     <servlet>
-        <servlet-name>ListProductsServlet</servlet-name>
-        <servlet-class>com.hotguy.warehouse13.view.ListProductsServlet</servlet-class>
+        <servlet-name>ListActiveServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.ListActiveServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ListProductsServlet</servlet-name>
-        <url-pattern>/listar</url-pattern>
+        <servlet-name>ListActiveServlet</servlet-name>
+        <url-pattern>/listar-activos</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ListRetiredServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.ListRetiredServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ListRetiredServlet</servlet-name>
+        <url-pattern>/listar-retirados</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -23,6 +34,8 @@
         <url-pattern>/buscar</url-pattern>
     </servlet-mapping>
 
+    <!-- ── Create ────────────────────────────────────────────────────────── -->
+
     <servlet>
         <servlet-name>InsertProductServlet</servlet-name>
         <servlet-class>com.hotguy.warehouse13.view.InsertProductServlet</servlet-class>
@@ -30,6 +43,46 @@
     <servlet-mapping>
         <servlet-name>InsertProductServlet</servlet-name>
         <url-pattern>/insertar</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── Update ────────────────────────────────────────────────────────── -->
+
+    <servlet>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.UpdateProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UpdateProductServlet</servlet-name>
+        <url-pattern>/actualizar</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RetireProductServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.RetireProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RetireProductServlet</servlet-name>
+        <url-pattern>/retirar</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>UnretireProductServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.UnretireProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UnretireProductServlet</servlet-name>
+        <url-pattern>/reactivar</url-pattern>
+    </servlet-mapping>
+
+    <!-- ── Delete ────────────────────────────────────────────────────────── -->
+
+    <servlet>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <servlet-class>com.hotguy.warehouse13.view.DeleteProductServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteProductServlet</servlet-name>
+        <url-pattern>/eliminar</url-pattern>
     </servlet-mapping>
 
 </web-app>
