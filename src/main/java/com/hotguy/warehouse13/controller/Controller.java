@@ -20,9 +20,7 @@ public class Controller implements ControllerContract {
 
     private final DataRepository repository;
 
-    /**
-     * Production constructor — uses the shared {@link DatabaseAccess} singleton.
-     */
+    /** Production constructor — uses the shared {@link DatabaseAccess} singleton. */
     public Controller() {
         this(DatabaseAccess.getInstance());
     }
@@ -36,13 +34,25 @@ public class Controller implements ControllerContract {
         this.repository = repository;
     }
 
+    // ── Read ─────────────────────────────────────────────────────────────────
+
     /** {@inheritDoc} */
     @Override
-    public String listAllProducts() {
+    public String listAllActive() {
         try {
-            return GSON.toJson(repository.findAll());
+            return GSON.toJson(repository.findAllActive());
         } catch (SQLException | ClassNotFoundException e) {
-            return errorJson("listAllProducts", e);
+            return errorJson("listAllActive", e);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String listAllRetired() {
+        try {
+            return GSON.toJson(repository.findAllRetired());
+        } catch (SQLException | ClassNotFoundException e) {
+            return errorJson("listAllRetired", e);
         }
     }
 
@@ -56,30 +66,80 @@ public class Controller implements ControllerContract {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     * Builds the correct model object here — the View passes raw values only.
-     */
+    // ── Create ───────────────────────────────────────────────────────────────
+
+    /** {@inheritDoc} */
     @Override
     public String insertProduct(String code, String description,
-            double price, int stock, String expirationDate) {
+                                double price, int stock, String expirationDate) {
         Product product = (expirationDate != null && !expirationDate.isBlank())
-                ? new PerishableProduct(code, description, price, stock, expirationDate)
-                : new Product(code, description, price, stock);
-
+            ? new PerishableProduct(code, description, price, stock, expirationDate)
+            : new Product(code, description, price, stock);
         try {
             repository.insert(product);
-            return GSON.toJson(Collections.singletonMap("status", "OK"));
+            return okJson();
         } catch (SQLException | ClassNotFoundException e) {
             return errorJson("insertProduct", e);
         }
     }
 
+    // ── Update ───────────────────────────────────────────────────────────────
+
+    /** {@inheritDoc} */
+    @Override
+    public String updateProduct(String code, String description, double price, int stock) {
+        Product product = new Product(code, description, price, stock);
+        try {
+            repository.update(product);
+            return okJson();
+        } catch (SQLException | ClassNotFoundException e) {
+            return errorJson("updateProduct", e);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String retireProduct(String code) {
+        try {
+            repository.retire(code);
+            return okJson();
+        } catch (SQLException | ClassNotFoundException e) {
+            return errorJson("retireProduct", e);
+        }
+    }
+
+    /** {@inheritDoc} */
+    @Override
+    public String unretireProduct(String code) {
+        try {
+            repository.unretire(code);
+            return okJson();
+        } catch (SQLException | ClassNotFoundException e) {
+            return errorJson("unretireProduct", e);
+        }
+    }
+
+    // ── Delete ───────────────────────────────────────────────────────────────
+
+    /** {@inheritDoc} */
+    @Override
+    public String deleteProduct(String code) {
+        try {
+            repository.delete(code);
+            return okJson();
+        } catch (SQLException | ClassNotFoundException e) {
+            return errorJson("deleteProduct", e);
+        }
+    }
+
     // ── Private helpers ──────────────────────────────────────────────────────
 
-    /** Builds a consistent JSON error response. */
+    private String okJson() {
+        return GSON.toJson(Collections.singletonMap("status", "OK"));
+    }
+
     private String errorJson(String operation, Exception e) {
         return GSON.toJson(Collections.singletonMap(
-                "error", operation + ": " + e.getMessage()));
+            "error", operation + ": " + e.getMessage()));
     }
 }
