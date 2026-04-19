@@ -7,8 +7,8 @@ import java.sql.SQLException;
 /** Provides JDBC connections to the warehouse MySQL database. */
 public class DatabaseConnection {
 
-    private static final String URL  = "jdbc:mysql://bbdd:3306/almacen";
-    private static final String USER = "almacen_user";
+    private static final String URL  = "jdbc:mysql://bbdd:3306/warehouse13";
+    private static final String USER = "warehouse13_user";
     private static final String PASS = "onlyforyoureyes";
 
     /** Utility class — no instances needed. */

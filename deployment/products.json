@@ -1,0 +1,94 @@
+[
+    {
+        "productCode": "PADT8901Y",
+        "description": "Alfombrilla de ratón XXL con base de goma",
+        "price": 19.99,
+        "stock": 89,
+        "class": "product"
+    },
+    {
+        "productCode": "AURC3456L",
+        "description": "Auriculaes inalámbricos con cancelación de ruido",
+        "price": 129.99,
+        "stock": 23,
+        "class": "product"
+    },
+    {
+        "productCode": "COOL6789I",
+        "description": "Base refrigeradora para portátil con 3 ventiladores",
+        "price": 29.95,
+        "stock": 41,
+        "class": "product"
+    },
+    {
+        "productCode": "CARG5678O",
+        "description": "Cargador rápido USB-C 65W con 2 puertos",
+        "price": 45.8,
+        "stock": 34,
+        "class": "product"
+    },
+    {
+        "productCode": "DISK1234R",
+        "description": "Disco duro externo 1TB USB-C resistente al agua",
+        "price": 79.99,
+        "stock": 18,
+        "class": "product"
+    },
+    {
+        "productCode": "HUBB2345M",
+        "description": "Hub USB 3.0 de 4 puertos con alimentación",
+        "price": 24.75,
+        "stock": 56,
+        "class": "product"
+    },
+    {
+        "productCode": "MICR2345U",
+        "description": "Micrófono USB de condensador para streaming",
+        "price": 65.3,
+        "stock": 27,
+        "class": "product"
+    },
+    {
+        "productCode": "MONS4567T",
+        "description": "Monitor portátil 15.6 pulgadas Full HD",
+        "price": 189.5,
+        "stock": 12,
+        "class": "product"
+    },
+    {
+        "productCode": "RATN9012K",
+        "description": "Ratón inalámbrico ergonómico con 5 botones",
+        "price": 34.5,
+        "stock": 67,
+        "class": "product"
+    },
+    {
+        "productCode": "LAPD9012P",
+        "description": "Soporte ajustable para portátil de aluminio",
+        "price": 39.99,
+        "stock": 50,
+        "class": "product"
+    },
+    {
+        "productCode": "TECL5678X",
+        "description": "Teclado mecánico RGB con switches rojos",
+        "price": 89.99,
+        "stock": 45,
+        "class": "product"
+    },
+    {
+        "expirationDate": "20260713",
+        "productCode": "INK55665F",
+        "description": "Toner b/w genérico HP 8750",
+        "price": 79.99,
+        "stock": 18,
+        "class": "perishableProduct"
+    },
+    {
+        "productCode": "WEBC7890P",
+        "description": "Webcam Full HD 1080p con micrófono integrado",
+        "price": 59.9,
+        "stock": 32,
+        "class": "product"
+    }
+]

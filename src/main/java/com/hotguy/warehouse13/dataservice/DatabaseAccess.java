@@ -46,10 +46,10 @@ public class DatabaseAccess implements DataRepository {
         String like = "%" + code + "%";
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "SELECT *, NULL AS expiration_date FROM " + TABLE_PRODUCTS
+            String sql = "SELECT product_code, description, price, stock, retired, NULL AS expiration_date FROM " + TABLE_PRODUCTS
                 + " WHERE product_code LIKE ?"
                 + " UNION ALL "
-                + "SELECT *, expiration_date FROM " + TABLE_PERISHABLE
+                + "SELECT product_code, description, price, stock, retired, expiration_date FROM " + TABLE_PERISHABLE
                 + " WHERE product_code LIKE ?";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -142,10 +142,10 @@ public class DatabaseAccess implements DataRepository {
         throws SQLException, ClassNotFoundException {
         List<Product> results = new ArrayList<>();
 
-        String sql = "SELECT *, NULL AS expiration_date FROM " + TABLE_PRODUCTS
+        String sql = "SELECT product_code, description, price, stock, retired, NULL AS expiration_date FROM " + TABLE_PRODUCTS
             + " WHERE retired = ?"
             + " UNION ALL "
-            + "SELECT *, expiration_date FROM " + TABLE_PERISHABLE
+            + "SELECT product_code, description, price, stock, retired, expiration_date FROM " + TABLE_PERISHABLE
             + " WHERE retired = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
