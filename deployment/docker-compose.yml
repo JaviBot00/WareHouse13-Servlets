@@ -1,51 +1,50 @@
-version: "3.8"
+version: '3.8'
 
 services:
+    bbdd:
+        image: mysql:8.0
+        restart: always
+        environment:
+            MYSQL_DATABASE: warehouse13
+            MYSQL_USER: warehouse13_user
+            MYSQL_PASSWORD: onlyforyoureyes
+            MYSQL_ROOT_PASSWORD: secretone
+        volumes:
+            - db_data:/var/lib/mysql
+            - ./db_backup:/docker-entrypoint-initdb.d
+        ports:
+            - '3306:3306'
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-psecretone']
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
 
-  bbdd:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: warehouse13
-      MYSQL_USER: warehouse13_user
-      MYSQL_PASSWORD: onlyforyoureyes
-      MYSQL_ROOT_PASSWORD: secretone
-    volumes:
-      - db_data:/var/lib/mysql
-      - ./db_backup:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-psecretone"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
+    servidorweb:
+        # image: tomcat:9.0
+        build:
+            context: .. # raíz del proyecto donde está el Dockerfile y el pom.xml
+            dockerfile: Dockerfile
+        ports:
+            - '8080:8080'
+        # volumes:
+        #   - ./web:/usr/local/tomcat/webapps
+        depends_on:
+            bbdd:
+                condition: service_healthy
 
-  servidorweb:
-    # image: tomcat:9.0
-    build:
-      context: ..          # raíz del proyecto donde está el Dockerfile y el pom.xml
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    # volumes:
-    #   - ./web:/usr/local/tomcat/webapps
-    depends_on:
-      bbdd:
-        condition: service_healthy
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2
-    environment:
-      PMA_HOST: bbdd
-      PMA_USER: root
-      PMA_PASSWORD: secretone
-    ports:
-      - "8081:80"
-    depends_on:
-      bbdd:
-        condition: service_healthy
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:5.2
+        environment:
+            PMA_HOST: bbdd
+            PMA_USER: root
+            PMA_PASSWORD: secretone
+        ports:
+            - '8081:80'
+        depends_on:
+            bbdd:
+                condition: service_healthy
 
 volumes:
-  db_data:
+    db_data:

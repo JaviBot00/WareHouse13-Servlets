@@ -30,6 +30,6 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 # Copia el .war desde el stage de build directamente a webapps
 # Tomcat lo despliega automáticamente al arrancar
 COPY --from=build /app/target/WareHouse13-Servlets.war \
-     /usr/local/tomcat/webapps/WareHouse13-Servlets.war
+    /usr/local/tomcat/webapps/WareHouse13-Servlets.war
 
 EXPOSE 8080
