@@ -9,7 +9,6 @@ services:
       MYSQL_DATABASE: warehouse13
       MYSQL_USER: warehouse13_user
       MYSQL_PASSWORD: onlyforyoureyes
-      MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: secretone
     volumes:
       - db_data:/var/lib/mysql
@@ -24,11 +23,14 @@ services:
       start_period: 30s
 
   servidorweb:
-    image: tomcat:9.0
+    # image: tomcat:9.0
+    build:
+      context: ..          # raíz del proyecto donde está el Dockerfile y el pom.xml
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    volumes:
-      - ./web:/usr/local/tomcat/webapps
+    # volumes:
+    #   - ./web:/usr/local/tomcat/webapps
     depends_on:
       bbdd:
         condition: service_healthy
