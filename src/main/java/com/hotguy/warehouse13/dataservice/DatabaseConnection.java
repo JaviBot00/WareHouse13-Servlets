@@ -10,6 +10,7 @@ public class DatabaseConnection {
     private static final String URL  = "jdbc:mysql://bbdd:3306/warehouse13";
     private static final String USER = "warehouse13_user";
     private static final String PASS = "onlyforyoureyes";
+    private static final String CLASSNAME = "com.mysql.cj.jdbc.Driver";
 
     /** Utility class — no instances needed. */
     private DatabaseConnection() {}
@@ -22,7 +23,7 @@ public class DatabaseConnection {
      * @throws ClassNotFoundException if the MySQL JDBC driver is not on the classpath
      */
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName(CLASSNAME);
         return DriverManager.getConnection(URL, USER, PASS);
     }
 }

@@ -1,6 +1,15 @@
 package com.hotguy.warehouse13.model;
 
-/** Represents a standard warehouse product. */
+/**
+ * Represents a standard warehouse product.
+ * <p>
+ * The attribute name {@code code} is intentionally concise — the fact
+ * that it identifies a product is implicit from the class context.
+ * <p>
+ * Validation is enforced on both client (Android) and server (Servlet)
+ * because the API endpoint can be called from any HTTP client, not
+ * only from the Android app.
+ */
 public class Product {
 
     private String code;
@@ -10,24 +19,36 @@ public class Product {
     private boolean retired;
 
     /**
-     * @param code        unique product code
-     * @param description human-readable name
-     * @param price       unit price (must be >= 0)
+     * @param code        unique product code (8–16 alphanumeric characters)
+     * @param description human-readable product name
+     * @param price       unit price (must be &gt;= 0)
      * @param stock       initial stock quantity
+     * @throws IllegalArgumentException if {@code code} does not meet length requirements
      */
     public Product(String code, String description, double price, int stock) {
-        this.code = code;
+        setCode(code);
         this.description = description;
         this.price = price;
         this.stock = stock;
         this.retired = false;
     }
 
+    // ── Getters and Setters ───────────────────────────────────────────────────
+
     /** @return unique product code */
     public String getCode() { return code; }
 
-    /** @param code unique product code */
-    public void setCode(String code) { this.code = code; }
+    /**
+     * @param code unique product code
+     * @throws IllegalArgumentException if {@code code} is null or not between 8 and 16 characters
+     */
+    public void setCode(String code) {
+        if (code == null || code.length() < 8 || code.length() > 16) {
+            throw new IllegalArgumentException(
+                "Product code must be alphanumeric and between 8 and 16 characters.");
+        }
+        this.code = code;
+    }
 
     /** @return product description */
     public String getDescription() { return description; }
@@ -38,7 +59,9 @@ public class Product {
     /** @return unit price */
     public double getPrice() { return price; }
 
-    /** @param price unit price; ignored if negative */
+    /**
+     * @param price unit price; ignored if negative
+     */
     public void setPrice(double price) {
         if (price >= 0.0) this.price = price;
     }
